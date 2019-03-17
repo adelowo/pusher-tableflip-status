@@ -31,7 +31,7 @@ $ python -m http.server 8000
 
 ```
 
-> You  will need to updae line 1 and 2 of `client/app.js` after which you can then visit http://localhost:8000
+> You  will need to updae line 1 and 25 of `client/app.js` after which you can then visit http://localhost:8000
 
 
 ## Built With

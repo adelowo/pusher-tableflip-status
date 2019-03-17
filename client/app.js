@@ -1,4 +1,4 @@
-const ROOM_ID = '19400030';
+const ROOM_ID = 'ROOM_ID';
 // A newly created user will only be able to post a message after this time
 const COOL_OFF_MINUTES = 5;
 
@@ -22,7 +22,7 @@ usernameForm.addEventListener('submit', e => {
       });
 
       const chatManager = new Chatkit.ChatManager({
-        instanceLocator: 'v1:us1:392c9cfe-19b3-43ec-8dab-357e895ce9e9',
+        instanceLocator: 'PUSHER_CHATKIT_INSTANCE_LOCATOR',
         userId: username,
         tokenProvider,
       });
