@@ -1,4 +1,5 @@
 const ROOM_ID = '19400030';
+// A newly created user will only be able to post a message after this time
 const COOL_OFF_MINUTES = 5;
 
 const usernameForm = document.getElementById('username-form');
