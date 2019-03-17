@@ -34,16 +34,6 @@ usernameForm.addEventListener('submit', e => {
               roomId: ROOM_ID,
               hooks: {
                 onMessage: message => {
-                  const duration = moment.duration(
-                    moment(Date.now()).diff(moment(createdAt))
-                  );
-
-                  if (duration.minutes() <= COOL_OFF_MINUTES) {
-                    alert(
-                      `You must be a member of this room for ${COOL_OFF_MINUTES} minutes before you can add a message`
-                    );
-                    return;
-                  }
                   const { senderId, text } = message;
 
                   const messageList = document.getElementById('messageList');
@@ -82,6 +72,17 @@ usernameForm.addEventListener('submit', e => {
               const sendMessage = document.getElementById('sendMessage');
               sendMessage.addEventListener('submit', e => {
                 e.preventDefault();
+
+                const duration = moment.duration(
+                  moment(Date.now()).diff(moment(createdAt))
+                );
+
+                if (duration.minutes() <= COOL_OFF_MINUTES) {
+                  alert(
+                    `You must be a member of this room for ${COOL_OFF_MINUTES} minutes before you can add a message`
+                  );
+                  return;
+                }
 
                 const message = e.target.message.value;
 
