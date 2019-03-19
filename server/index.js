@@ -32,7 +32,7 @@ app.post('/users', (req, res) => {
       const now = Date.now();
 
       allUsers.push({ name: username, timestamp: now });
-      res.status(201).send({ created_at: now });
+      res.status(201).send({ created_at: now, skip_cooloff: false });
     })
     .catch(err => {
       if (err.error === 'services/chatkit/user_already_exists') {
@@ -41,13 +41,13 @@ app.post('/users', (req, res) => {
         });
 
         if (user === undefined) {
-          res
-            .status(500)
-            .send({ error: "could not get user's registration date" });
+          res.status(200).send({ created_at: 0, skip_cooloff: true });
           return;
         }
 
-        res.status(200).json({ created_at: user.timestamp });
+        res
+          .status(200)
+          .send({ created_at: user.timestamp, skip_cooloff: false });
       } else {
         res.status(err.status).json(err);
       }

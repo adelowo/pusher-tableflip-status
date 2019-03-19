@@ -12,7 +12,14 @@ usernameForm.addEventListener('submit', e => {
   axios
     .post('http://localhost:5200/users', { username })
     .then(res => {
-      const createdAt = res.data.created_at;
+      const skipCooloff = res.data.skip_cooloff;
+      let createdAt = 0;
+
+      if (skipCooloff) {
+        alert('This user is an existing user, there will be no cooloff ');
+      } else {
+        createdAt = res.data.created_at;
+      }
 
       document.getElementById('join').style.display = 'none';
       document.getElementById('chatbox').style.display = 'block';
@@ -74,15 +81,17 @@ usernameForm.addEventListener('submit', e => {
               sendMessage.addEventListener('submit', e => {
                 e.preventDefault();
 
-                const duration = moment.duration(
-                  moment(Date.now()).diff(moment(createdAt))
-                );
-
-                if (duration.minutes() <= COOL_OFF_MINUTES) {
-                  alert(
-                    `You must be a member of this room for ${COOL_OFF_MINUTES} minutes before you can add a message`
+                if (!skipCooloff) {
+                  const duration = moment.duration(
+                    moment(Date.now()).diff(moment(createdAt))
                   );
-                  return;
+
+                  if (duration.minutes() <= COOL_OFF_MINUTES) {
+                    alert(
+                      `You must be a member of this room for ${COOL_OFF_MINUTES} minutes before you can add a message`
+                    );
+                    return;
+                  }
                 }
 
                 const message = e.target.message.value;
