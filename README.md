@@ -5,6 +5,8 @@ period of time. With this, a user will not be able to post until 5 minutes after
 the time (s)he was created.
 This is quite popular in online communities, take Discord as an example https://support.discordapp.com/hc/en-us/articles/216679607-What-are-Verification-Levels-
 
+https://pusher.com/tutorials/new-users-chatroom-wait
+
 #### Prerequisites
 
 - Node.js ( `>=8` )
